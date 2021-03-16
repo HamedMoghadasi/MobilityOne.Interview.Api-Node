@@ -18,7 +18,6 @@ export default class UserService {
       throw error;
     }
   }
-
   static async add(user) {
     try {
       return connection

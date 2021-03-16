@@ -16,7 +16,6 @@ export default class UserController {
         return response.send(res);
       });
   }
-
   static async getById(req, res) {
     var id = req.params.id;
     userService
@@ -35,7 +34,6 @@ export default class UserController {
         return response.send(res);
       });
   }
-
   static async add(req, res) {
     var user = req.body;
     userService
