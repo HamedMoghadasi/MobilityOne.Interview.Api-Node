@@ -22,8 +22,13 @@ export default class UserController {
     userService
       .getById(id)
       .then((result) => {
-        response.setSuccess(200, "the user fetched successfully.", result[0]);
-        return response.send(res);
+        if (result[0].length > 0) {
+          response.setSuccess(200, "the user fetched successfully.", result[0]);
+          return response.send(res);
+        } else {
+          response.setError(404, "the user not founded!");
+          return response.send(res);
+        }
       })
       .catch((error) => {
         response.setError(500, "fetching the user failed!");
@@ -36,15 +41,44 @@ export default class UserController {
     userService
       .add(user)
       .then((result) => {
-        console.log(`result`, result);
         response.setSuccess(200, "user added successfully.", result[0]);
         return response.send(res);
       })
       .catch((error) => {
-        response.setError(500, "adding user failed!");
+        response.setError(500, "adding user failed!", error);
         return response.send(res);
       });
   }
-  static async update(req, res) {}
-  static async delete(req, res) {}
+  static async update(req, res) {
+    var user = req.body;
+    userService
+      .update(user)
+      .then((result) => {
+        console.log(`result`, result);
+        response.setSuccess(200, "user updated successfully.", result[0]);
+        return response.send(res);
+      })
+      .catch((error) => {
+        response.setError(500, "updating user failed!", error);
+        return response.send(res);
+      });
+  }
+  static async delete(req, res) {
+    var id = req.params.id;
+    userService
+      .delete(id)
+      .then((result) => {
+        if (result[0].affectedRows > 0) {
+          response.setSuccess(200, "user deleted successfully.");
+          return response.send(res);
+        } else {
+          response.setError(404, "user not founded.");
+          return response.send(res);
+        }
+      })
+      .catch((error) => {
+        response.setError(500, "deleting user failed!", error);
+        return response.send(res);
+      });
+  }
 }

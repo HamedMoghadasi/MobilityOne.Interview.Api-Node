@@ -1,46 +1,56 @@
 import { connection } from "../common/database";
-import moment from "moment";
+import { userQueries } from "./queries/user-queries";
 
 export default class UserService {
   static async getAll() {
     try {
-      return connection.promise().query("SELECT * FROM Users");
+      return connection.promise().query(userQueries.getAll());
     } catch (error) {
+      console.log(`error`, error);
       throw error;
     }
   }
   static async getById(id) {
     try {
-      return connection
-        .promise()
-        .query("SELECT * FROM Users WHERE `Id` = ?", [id]);
+      return connection.promise().query(userQueries.getById(id));
     } catch (error) {
+      console.log(`error`, error);
       throw error;
     }
   }
 
   static async add(user) {
     try {
-      var utcnow = moment.utc().format("YYYY-MM-DD HH:mm");
-      var query = `INSERT INTO users
-        (name,phoneNumber,emailAddress,password,lastLogin,createDate,suspended)
-        VALUES
-        ('${user.name}','${user.phoneNumber}','${user.emailAddress}','${user.password}',
-         '${utcnow}','${utcnow}',${user.suspended});
-         SELECT * FROM users WHERE id = LAST_INSERT_ID()`;
-      console.log(`query -- `, query);
-
       return connection
         .promise()
-        .query(query)
+        .query(userQueries.add(user))
         .then((result) => {
           return result[0][1]; // 'Cuz we run two statement in query, as a result it'll return a 2 dim array.
-        })
-        .catch((er) => console.log(`er`, er));
+        });
     } catch (error) {
+      console.log(`error`, error);
       throw error;
     }
   }
-  static async update(req, res) {}
-  static async delete(req, res) {}
+  static async update(user) {
+    try {
+      return connection
+        .promise()
+        .query(userQueries.update(user))
+        .then((result) => {
+          return result[0][1]; // 'Cuz we run two statement in query, as a result it'll return a 2 dim array.
+        });
+    } catch (error) {
+      console.log(`error`, error);
+      throw error;
+    }
+  }
+  static async delete(id) {
+    try {
+      return connection.promise().query(userQueries.delete(id));
+    } catch (error) {
+      console.log(`error`, error);
+      throw error;
+    }
+  }
 }
