@@ -54,7 +54,6 @@ export default class UserController {
     userService
       .update(user)
       .then((result) => {
-        console.log(`result`, result);
         response.setSuccess(200, "user updated successfully.", result[0]);
         return response.send(res);
       })
