@@ -8,7 +8,7 @@
     "test": "mocha"
   },
   "keywords": [],
-  "author": "",
+  "author": "Hamed Moghadasi",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.3.4",
