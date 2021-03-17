@@ -5,13 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",
-    "test": "mocha"
+    "build": "babel src -d build"
   },
   "keywords": [],
   "author": "Hamed Moghadasi",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "babel-cli": "^6.26.0",
     "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -19,14 +24,9 @@
     "mocha": "^8.3.2",
     "moment": "^2.29.1",
     "mysql2": "^2.2.5",
-    "@babel/core": "^7.13.10",
-    "@babel/node": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "chai-http": "^4.3.0",
     "nodemon": "^2.0.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.10",
     "@babel/node": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "chai-http": "^4.3.0",
