@@ -12,7 +12,7 @@ export default class UserController {
         return response.send(res);
       })
       .catch((error) => {
-        response.setError(500, "fetching all users failed!");
+        response.setError(500, "fetching all users failed!", error);
         return response.send(res);
       });
   }
@@ -30,7 +30,7 @@ export default class UserController {
         }
       })
       .catch((error) => {
-        response.setError(500, "fetching the user failed!");
+        response.setError(500, "fetching the user failed!", error);
         return response.send(res);
       });
   }
