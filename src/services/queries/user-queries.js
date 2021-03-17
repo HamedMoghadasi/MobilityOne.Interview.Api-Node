@@ -2,10 +2,10 @@ import moment from "moment";
 
 export const userQueries = {
   getAll: () => {
-    return "SELECT * FROM Users";
+    return "SELECT * FROM users";
   },
   getById: (id) => {
-    return `SELECT * FROM Users WHERE Id = ${id}`;
+    return `SELECT * FROM users WHERE Id = ${id}`;
   },
   add: (user) => {
     var utcnow = moment.utc().format("YYYY-MM-DD HH:mm");
@@ -25,10 +25,10 @@ export const userQueries = {
     password = '${user.password}' ,
     suspended = ${user.suspended}
     WHERE id = ${user.id};
-    SELECT * FROM Users WHERE id = ${user.id};
+    SELECT * FROM users WHERE id = ${user.id};
     `;
   },
   delete: (id) => {
-    return `DELETE FROM Users WHERE Id = ${id}`;
+    return `DELETE FROM users WHERE Id = ${id}`;
   },
 };
